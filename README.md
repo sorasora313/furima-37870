@@ -19,7 +19,6 @@ has_many :orders
 ## itemsテーブル
 
 |Column    |Type     |Options                        |
-|image     |string    |null: false                   |
 |name      |string    |null: false                   |
 |explain   |text      |null: false                   |
 |category  |integer   |null: false                   |
