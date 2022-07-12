@@ -19,9 +19,9 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :schedule_day_id
     validates :price
-    validates :user_id
+
   end
-  validates :price, presence: true, numericality: {greater_than_or_equal_to: 300,less_than_or_equal_to: 9999999}
+  validates :price, presence: true, only_integer: true, numericality: {greater_than_or_equal_to: 300,less_than_or_equal_to: 9999999}
 
   with_options numericality: {other_than: 1} do
     validates :category_id
