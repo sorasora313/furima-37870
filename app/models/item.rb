@@ -13,13 +13,13 @@ class Item < ApplicationRecord
     validates :image
     validates :name
     validates :explain
-    validates :category
-    validates :condition
-    validates :charge
-    validates :prefecture
-    validates :schedule_day
+    validates :category_id
+    validates :condition_id
+    validates :charge_id
+    validates :prefecture_id
+    validates :schedule_day_id
     validates :price
-    validates :user
+    validates :user_id
   end
   validates :price, presence: true, numericality: {greater_than_or_equal_to: 300,less_than_or_equal_to: 9999999}
 
