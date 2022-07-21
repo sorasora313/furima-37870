@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   belongs_to :charge
   belongs_to :prefecture
   belongs_to :schedule_day
+  has_one :order
 
   with_options presence: true do
     validates :image
