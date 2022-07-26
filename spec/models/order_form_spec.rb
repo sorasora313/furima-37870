@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe OrderForm, type: :model do
   before do
-    @order_form = FactoryBot.build(:order_form)
-  end
+    user_id = FactoryBot.create(:user)
+    item_id = FactoryBot.create(:item)
+    @order_form = FactoryBot.build(:order_form, user_id: user_id, item_id: item_id)
+   end
 
   describe '配送先情報の保存' do
     context '配送先情報の保存ができるとき' do
@@ -42,7 +44,7 @@ RSpec.describe OrderForm, type: :model do
       it '郵便番号が空だと保存できないこと' do
         @order_form.post_code = nil
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Post code can't be blank", "Post code is invalid. Include hyphen(-)")
+        expect(@order_form.errors.full_messages).to include("Post code can't be blank")
       end
       it '郵便番号がハイフンを含まないと保存できない' do
         @order_form.post_code ='5556666'
@@ -72,7 +74,7 @@ RSpec.describe OrderForm, type: :model do
       it '電話番号が空欄だと保存できない' do
         @order_form.telephone = nil
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Telephone can't be blank", "Telephone is invalid")
+        expect(@order_form.errors.full_messages).to include("Telephone can't be blank")
       end
       it '電話番号が全角数字だと保存できない' do
         @order_form.telephone = '０９０８８８８７７７７'
@@ -99,6 +101,16 @@ RSpec.describe OrderForm, type: :model do
       @order_form.valid?
       expect(@order_form.errors.full_messages).to include("Token can't be blank")
       
+      end
+      it 'user_idが空だと保存できない' do
+        @order_form.user_id = nil
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空だと保存できない' do
+        @order_form.item_id = nil
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Item can't be blank")
       end
 
     end
