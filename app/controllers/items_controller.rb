@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :sign_in, only: [:new]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -56,13 +55,7 @@ def destroy
   def set_item
     @item = Item.find(params[:id])
   end
+  
 
-  def sign_in
-    unless user_signed_in?
-      redirect_to "/users/sign_in"
-    end
-  end
-  
-  
 
 end
